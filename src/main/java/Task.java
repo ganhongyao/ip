@@ -1,15 +1,19 @@
-public class Task {
+public abstract class Task {
     private String name;
     private boolean isDone;
 
-    public Task(String name) {
+    protected Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
-    public Task markAsDone() {
+    protected Task markAsDone() {
         isDone = true;
         return this;
+    }
+
+    public boolean checkTaskDone() {
+        return isDone;
     }
 
     private String getStatusIcon() {
