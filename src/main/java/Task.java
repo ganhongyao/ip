@@ -16,12 +16,8 @@ public class Task {
         return isDone ? "X" : " ";
     }
 
-    public String getTaskName() {
-        return name;
-    }
-
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), getTaskName());
+        return String.format("[%s] %s", getStatusIcon(), name);
     }
 }

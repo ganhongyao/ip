@@ -8,9 +8,8 @@ public class TaskManager {
         this.taskList = new ArrayList<>();
     }
 
-    public String addTask(Task task) {
+    public void addTask(Task task) {
         taskList.add(task);
-        return String.format("added: %s", task.getTaskName());
     }
 
     public Task markTaskAsDone(int taskNumber) {

@@ -8,9 +8,12 @@ public class Duke {
     private static final String MARK_TASK_AS_DONE_COMMAND = "done";
     private static final String EXIT_COMMAND = "bye";
 
+    private static final String ADD_TODO_COMMAND = "todo";
+
     // User-facing messages
     private static final String GREETING_MESSAGE = "Hello! I'm Duke. What can I do for you?";
     private static final String MARKED_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n  %s";
+    private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:\n  %s";
     private static final String EXIT_MESSAGE = "Goodbye. Hope to see you again soon!";
 
     // User-facing error messages
@@ -62,10 +65,16 @@ public class Duke {
                 prettifier.print(EXIT_MESSAGE);
                 scanner.close();
                 return;
+            case ADD_TODO_COMMAND:
+                String toDoName = inputLine.substring(ADD_TODO_COMMAND.length() + 1);
+                ToDo toDo = new ToDo(toDoName);
+                taskManager.addTask(toDo);
+                prettifier.print(String.format(TASK_ADDED_MESSAGE, toDo.toString()));
+                break;
             default:
                 // Add task to the task manager
-                String result = taskManager.addTask(new Task(inputLine));
-                prettifier.print(result);
+                // String result = taskManager.addTask(new Task(inputLine));
+                // prettifier.print(result);
                 break;
             }
         }
