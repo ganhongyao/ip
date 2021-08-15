@@ -9,6 +9,8 @@ public class Duke {
     private static final String EXIT_COMMAND = "bye";
 
     private static final String ADD_TODO_COMMAND = "todo";
+    private static final String ADD_DEADLINE_COMMAND = "deadline";
+    private static final String DEADLINE_COMMAND_DELIMITER = "/by";
 
     // User-facing messages
     private static final String GREETING_MESSAGE = "Hello! I'm Duke. What can I do for you?";
@@ -23,6 +25,8 @@ public class Duke {
             "You need to give me a valid number to mark as completed.";
     private static final String TASK_NOT_FOUND_MESSAGE =
             "You don't have a task with that number.";
+    private static final String MISSING_TASK_NAME_MESSAGE = "You have to let me know what the name of the task is.";
+    private static final String MISSING_DEADLINE_DUE_DATE_MESSAGE = "You have to let me know when the deadline is by.";
 
     // ResponsePrettifier settings
     private static final int INDENTATION_LEVEL = 4;
@@ -61,16 +65,46 @@ public class Duke {
                     prettifier.print(TASK_NOT_FOUND_MESSAGE);
                 }
                 break;
-            case EXIT_COMMAND:
-                prettifier.print(EXIT_MESSAGE);
-                scanner.close();
-                return;
             case ADD_TODO_COMMAND:
-                String toDoName = inputLine.substring(ADD_TODO_COMMAND.length() + 1);
+                String toDoName = inputLine.substring(ADD_TODO_COMMAND.length() + 1).trim();
+                if (toDoName.isEmpty()) {
+                    // Name was not provided
+                    prettifier.print(MISSING_TASK_NAME_MESSAGE);
+                    break;
+                }
                 ToDo toDo = new ToDo(toDoName);
                 taskManager.addTask(toDo);
                 prettifier.print(String.format(TASK_ADDED_MESSAGE, toDo.toString()));
                 break;
+            case ADD_DEADLINE_COMMAND:
+                String[] deadlineDetails = inputLine.
+                        substring(ADD_DEADLINE_COMMAND.length() + 1).
+                        split(DEADLINE_COMMAND_DELIMITER);
+                if (deadlineDetails.length < 2) {
+                    // "/by" was not provided, or an empty string was provided after "/by"
+                    prettifier.print(MISSING_DEADLINE_DUE_DATE_MESSAGE);
+                    break;
+                }
+                String deadlineName = deadlineDetails[0].trim();
+                if (deadlineName.isEmpty()) {
+                    // Name of Deadline was not provided
+                    prettifier.print(MISSING_TASK_NAME_MESSAGE);
+                    break;
+                }
+                String deadlineDueDate = deadlineDetails[1].trim();
+                if (deadlineDueDate.isEmpty()) {
+                    // Due Date is empty string after trimming whitespace
+                    prettifier.print(MISSING_DEADLINE_DUE_DATE_MESSAGE);
+                    break;
+                }
+                Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
+                taskManager.addTask(deadline);
+                prettifier.print(String.format(TASK_ADDED_MESSAGE, deadline.toString()));
+                break;
+            case EXIT_COMMAND:
+                prettifier.print(EXIT_MESSAGE);
+                scanner.close();
+                return;
             default:
                 // Add task to the task manager
                 // String result = taskManager.addTask(new Task(inputLine));
