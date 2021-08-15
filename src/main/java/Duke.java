@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,6 +9,8 @@ public class Duke {
     private static final String ADD_TODO_COMMAND = "todo";
     private static final String ADD_DEADLINE_COMMAND = "deadline";
     private static final String DEADLINE_COMMAND_DELIMITER = "/by";
+    private static final String ADD_EVENT_COMMAND = "event";
+    private static final String EVENT_COMMAND_DELIMITER = "/at";
 
     // User-facing messages
     private static final String GREETING_MESSAGE = "Hello! I'm Duke. What can I do for you?";
@@ -19,6 +19,7 @@ public class Duke {
     private static final String EXIT_MESSAGE = "Goodbye. Hope to see you again soon!";
 
     // User-facing error messages
+    private static final String INVALID_COMMAND_MESSAGE = "Invalid command.";
     private static final String MISSING_TASK_NUMBER_MESSAGE =
             "You have to let me know which task to be marked as completed.";
     private static final String INVALID_TASK_NUMBER_MESSAGE =
@@ -27,6 +28,7 @@ public class Duke {
             "You don't have a task with that number.";
     private static final String MISSING_TASK_NAME_MESSAGE = "You have to let me know what the name of the task is.";
     private static final String MISSING_DEADLINE_DUE_DATE_MESSAGE = "You have to let me know when the deadline is by.";
+    private static final String MISSING_EVENT_TIMESTAMP_MESSAGE = "You have to let me know when the event is.";
 
     // ResponsePrettifier settings
     private static final int INDENTATION_LEVEL = 4;
@@ -74,7 +76,7 @@ public class Duke {
                 }
                 ToDo toDo = new ToDo(toDoName);
                 taskManager.addTask(toDo);
-                prettifier.print(String.format(TASK_ADDED_MESSAGE, toDo.toString()));
+                prettifier.print(String.format(TASK_ADDED_MESSAGE, toDo));
                 break;
             case ADD_DEADLINE_COMMAND:
                 String[] deadlineDetails = inputLine.
@@ -99,16 +101,39 @@ public class Duke {
                 }
                 Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
                 taskManager.addTask(deadline);
-                prettifier.print(String.format(TASK_ADDED_MESSAGE, deadline.toString()));
+                prettifier.print(String.format(TASK_ADDED_MESSAGE, deadline));
+                break;
+            case ADD_EVENT_COMMAND:
+                String[] eventDetails = inputLine.
+                        substring(ADD_EVENT_COMMAND.length() + 1).
+                        split(EVENT_COMMAND_DELIMITER);
+                if (eventDetails.length < 2) {
+                    // "/at" was not provided, or an empty string was provided after "/at"
+                    prettifier.print(MISSING_EVENT_TIMESTAMP_MESSAGE);
+                    break;
+                }
+                String eventName = eventDetails[0].trim();
+                if (eventName.isEmpty()) {
+                    // Name of Event was not provided
+                    prettifier.print(MISSING_TASK_NAME_MESSAGE);
+                    break;
+                }
+                String eventTimestamp = eventDetails[1].trim();
+                if (eventTimestamp.isEmpty()) {
+                    // Timestamp is empty string after trimming whitespace
+                    prettifier.print(MISSING_EVENT_TIMESTAMP_MESSAGE);
+                    break;
+                }
+                Event event = new Event(eventName, eventTimestamp);
+                taskManager.addTask(event);
+                prettifier.print(String.format(TASK_ADDED_MESSAGE, event));
                 break;
             case EXIT_COMMAND:
                 prettifier.print(EXIT_MESSAGE);
                 scanner.close();
                 return;
             default:
-                // Add task to the task manager
-                // String result = taskManager.addTask(new Task(inputLine));
-                // prettifier.print(result);
+                prettifier.print(INVALID_COMMAND_MESSAGE);
                 break;
             }
         }
