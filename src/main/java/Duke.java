@@ -14,8 +14,6 @@ public class Duke {
 
     // User-facing messages
     private static final String GREETING_MESSAGE = "Hello! I'm Duke. What can I do for you?";
-    private static final String MARKED_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n  %s";
-    private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:\n  %s";
     private static final String EXIT_MESSAGE = "Goodbye. Hope to see you again soon!";
 
     // User-facing error messages
@@ -24,8 +22,6 @@ public class Duke {
             "You have to let me know which task to be marked as completed.";
     private static final String INVALID_TASK_NUMBER_MESSAGE =
             "You need to give me a valid number to mark as completed.";
-    private static final String TASK_NOT_FOUND_MESSAGE =
-            "You don't have a task with that number.";
     private static final String MISSING_TASK_NAME_MESSAGE = "You have to let me know what the name of the task is.";
     private static final String MISSING_DEADLINE_DUE_DATE_MESSAGE = "You have to let me know when the deadline is by.";
     private static final String MISSING_EVENT_TIMESTAMP_MESSAGE = "You have to let me know when the event is.";
@@ -57,14 +53,10 @@ public class Duke {
                 }
                 try {
                     int taskNumber = Integer.parseInt(inputArguments[1]);
-                    Task task = taskManager.markTaskAsDone(taskNumber);
-                    prettifier.print(String.format(MARKED_TASK_AS_DONE_MESSAGE, task.toString()));
+                    prettifier.print(taskManager.markTaskAsDone(taskNumber));
                 } catch (NumberFormatException e) {
                     // User provided an argument that is not parsable.
                     prettifier.print(INVALID_TASK_NUMBER_MESSAGE);
-                } catch (IndexOutOfBoundsException e) {
-                    // User provided a task number that is not in the task list.
-                    prettifier.print(TASK_NOT_FOUND_MESSAGE);
                 }
                 break;
             case ADD_TODO_COMMAND:
@@ -75,8 +67,7 @@ public class Duke {
                     break;
                 }
                 ToDo toDo = new ToDo(toDoName);
-                taskManager.addTask(toDo);
-                prettifier.print(String.format(TASK_ADDED_MESSAGE, toDo));
+                prettifier.print(taskManager.addTask(toDo));
                 break;
             case ADD_DEADLINE_COMMAND:
                 String[] deadlineDetails = inputLine.
@@ -100,8 +91,7 @@ public class Duke {
                     break;
                 }
                 Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
-                taskManager.addTask(deadline);
-                prettifier.print(String.format(TASK_ADDED_MESSAGE, deadline));
+                prettifier.print(taskManager.addTask(deadline));
                 break;
             case ADD_EVENT_COMMAND:
                 String[] eventDetails = inputLine.
@@ -125,8 +115,7 @@ public class Duke {
                     break;
                 }
                 Event event = new Event(eventName, eventTimestamp);
-                taskManager.addTask(event);
-                prettifier.print(String.format(TASK_ADDED_MESSAGE, event));
+                prettifier.print(taskManager.addTask(event));
                 break;
             case EXIT_COMMAND:
                 prettifier.print(EXIT_MESSAGE);
