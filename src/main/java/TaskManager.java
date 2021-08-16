@@ -26,7 +26,7 @@ public class TaskManager {
         return String.format(TASK_ADDED_MESSAGE, task, taskCount, pluralised);
     }
 
-    public String markTaskAsDone(int taskNumber) {
+    public String markTaskAsDone(int taskNumber) throws DukeException {
         try {
             // User input is 1-indexed
             int taskIndex = taskNumber - 1;
@@ -36,7 +36,7 @@ public class TaskManager {
             String pluralised = undoneTaskCount > 1 || undoneTaskCount == 0 ? "tasks" : "task";
             return String.format(MARKED_TASK_AS_DONE_MESSAGE, task, undoneTaskCount, pluralised);
         } catch (IndexOutOfBoundsException e) {
-            return TASK_NOT_FOUND_MESSAGE;
+            throw new DukeException(TASK_NOT_FOUND_MESSAGE);
         }
     }
 
