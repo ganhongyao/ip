@@ -3,6 +3,7 @@ todo borrow book
 list
 done
 done asd
+done 999
 done 1
 deadline
 deadline return book
@@ -14,6 +15,7 @@ list
 done 3
 delete
 delete asd
+delete 999
 delete 2
 list
 bye
