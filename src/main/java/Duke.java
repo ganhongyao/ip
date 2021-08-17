@@ -36,24 +36,6 @@ public class Duke {
                 case LIST:
                     prettifier.print(taskManager.toString());
                     break;
-                case DONE:
-                    try {
-                        int taskNumber = Integer.parseInt(inputLineWithoutCommand);
-                        prettifier.print(taskManager.markTaskAsDone(taskNumber));
-                    } catch (NumberFormatException e) {
-                        // User provided an argument that is not parsable.
-                        throw new DukeException(INVALID_TASK_NUMBER_MESSAGE);
-                    }
-                    break;
-                case DELETE:
-                    try {
-                        int taskNumber = Integer.parseInt(inputLineWithoutCommand);
-                        prettifier.print(taskManager.deleteTask(taskNumber));
-                    } catch (NumberFormatException e) {
-                        // User provided an argument that is not parsable.
-                        throw new DukeException(INVALID_TASK_NUMBER_MESSAGE);
-                    }
-                    break;
                 case TODO:
                     String toDoName = inputLineWithoutCommand;
                     ToDo toDo = new ToDo(toDoName);
@@ -72,6 +54,24 @@ public class Duke {
                     String eventTimestamp = eventDetails[1];
                     Event event = new Event(eventName, eventTimestamp);
                     prettifier.print(taskManager.addTask(event));
+                    break;
+                case DONE:
+                    try {
+                        int taskNumber = Integer.parseInt(inputLineWithoutCommand);
+                        prettifier.print(taskManager.markTaskAsDone(taskNumber));
+                    } catch (NumberFormatException e) {
+                        // User provided an argument that is not parsable.
+                        throw new DukeException(INVALID_TASK_NUMBER_MESSAGE);
+                    }
+                    break;
+                case DELETE:
+                    try {
+                        int taskNumber = Integer.parseInt(inputLineWithoutCommand);
+                        prettifier.print(taskManager.deleteTask(taskNumber));
+                    } catch (NumberFormatException e) {
+                        // User provided an argument that is not parsable.
+                        throw new DukeException(INVALID_TASK_NUMBER_MESSAGE);
+                    }
                     break;
                 case BYE:
                     prettifier.print(EXIT_MESSAGE);
