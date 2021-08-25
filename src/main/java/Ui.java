@@ -1,8 +1,11 @@
+import java.util.Scanner;
+
 public class Ui {
     private static final int DEFAULT_INDENTATION_LEVEL = 4;
     private static final String DEFAULT_SEPARATOR = "_";
     private static final int DEFAULT_SEPARATOR_LENGTH = 60;
 
+    private final Scanner scanner = new Scanner(System.in);
     private final String indent;
     private final String separator;
 
@@ -19,7 +22,12 @@ public class Ui {
         }
     }
 
+    public String readCommand() {
+        return scanner.nextLine();
+    }
+
     public void farewell() {
+        scanner.close();
         print("Goodbye. Hope to see you again soon!");
     }
 
