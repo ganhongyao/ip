@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 public class DeleteTaskCommand extends Command {
     public static final String COMMAND_WORD = "delete";

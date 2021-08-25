@@ -1,4 +1,11 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.task.TaskManager;
+import duke.ui.Ui;
+import duke.util.DukeDateTime;
 
 public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "event";

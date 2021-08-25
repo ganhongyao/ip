@@ -1,4 +1,14 @@
-package duke;
+package duke.parser;
+
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddToDoCommand;
+import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.ExitCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
 
 public class Parser {
     public static Command parse(String fullCommand) {

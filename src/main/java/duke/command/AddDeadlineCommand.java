@@ -1,4 +1,11 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.TaskManager;
+import duke.ui.Ui;
+import duke.util.DukeDateTime;
 
 public class AddDeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
