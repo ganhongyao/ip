@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends Task implements Timestampable {
     private final DukeDateTime timestamp;
 

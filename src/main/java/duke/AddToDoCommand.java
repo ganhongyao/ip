@@ -1,3 +1,5 @@
+package duke;
+
 public class AddToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
     public static final String USAGE_MESSAGE = "To add a new todo, use 'todo <name>'.";

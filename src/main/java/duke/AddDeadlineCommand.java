@@ -1,3 +1,5 @@
+package duke;
+
 public class AddDeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     public static final String USAGE_MESSAGE = "To add a new deadline, use 'deadline <name> /by <due-date>'.";

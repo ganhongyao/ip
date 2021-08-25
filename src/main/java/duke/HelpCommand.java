@@ -1,3 +1,5 @@
+package duke;
+
 public class HelpCommand extends Command {
     private static final String[] ALL_USAGES = new String[]{
             AddToDoCommand.USAGE_MESSAGE,

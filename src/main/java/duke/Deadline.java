@@ -1,3 +1,5 @@
+package duke;
+
 public class Deadline extends Task implements Timestampable {
     private final DukeDateTime dueDate;
 

@@ -1,3 +1,5 @@
+package duke;
+
 public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     public static final String USAGE_MESSAGE = "To add a new event, use 'event <name> /at <event-timestamp>'.";
