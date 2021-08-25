@@ -7,14 +7,7 @@ import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
 
-import java.util.Scanner;
-
 public class Duke {
-    // User-facing error messages
-    private static final String INVALID_COMMAND_MESSAGE = "Invalid command.";
-    private static final String INVALID_TASK_NUMBER_MESSAGE = "Invalid task number.";
-
-    private final Scanner scanner = new Scanner(System.in);
     private final Storage storage;
     private TaskManager taskManager;
     private final Ui ui;
