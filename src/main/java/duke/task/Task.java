@@ -23,18 +23,30 @@ public abstract class Task {
         return this;
     }
 
+    /**
+     * Returns the name of the task.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns whether the task is marked as completed.
+     */
     public boolean checkTaskDone() {
         return isDone;
     }
 
+    /**
+     * Returns the string representation of the completion status of the <code>Task</code>.
+     */
     public String getStatusIcon() {
         return isDone ? "X" : " ";
     }
 
+    /**
+     * Returns the text representation of the <code>Task</code>.
+     */
     public abstract String toText();
 
     @Override
