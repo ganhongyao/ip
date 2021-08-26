@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.exception.DukeException;
+import duke.parser.TaskParser;
 import duke.task.Task;
 import duke.task.TaskManager;
 
@@ -47,7 +48,7 @@ public class Storage {
             String nextLine = bufferedReader.readLine();
             while (nextLine != null) {
                 try {
-                    taskList.add(Task.fromText(nextLine));
+                    taskList.add(TaskParser.parse(nextLine));
                 } catch (DukeException e) {
                     System.out.printf("Bad task format found in %s: %s\nSkipping over...\n", filePath, e.getMessage());
                 }
