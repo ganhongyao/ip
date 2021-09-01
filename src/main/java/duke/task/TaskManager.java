@@ -45,7 +45,7 @@ public class TaskManager {
     private int getUndoneTaskCount() {
         int count = 0;
         for (Task t : taskList) {
-            if (!t.checkTaskDone()) {
+            if (!t.isDone()) {
                 count++;
             }
         }
