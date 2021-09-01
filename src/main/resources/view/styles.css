@@ -16,6 +16,7 @@
     -fx-background-image: url(../images/background.png);
     -fx-background-size: 100%;
     -fx-background-position: bottom;
+    -fx-padding: 10;
 }
 
 .dialog-box {
