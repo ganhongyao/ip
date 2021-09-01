@@ -20,6 +20,13 @@
 
 .dialog-box {
     -fx-background-radius: 15;
-    -fx-background-color: #eeeee4;
     -fx-padding: 10;
+}
+
+.duke-dialog-background {
+    -fx-background-color: #FFE194;
+}
+
+.user-dialog-background {
+    -fx-background-color: #B8DFD8;
 }

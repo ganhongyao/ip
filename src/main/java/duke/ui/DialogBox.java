@@ -25,7 +25,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    // Dynamic style classes
+    private static final String[] dukeStyleClasses = {"duke-dialog-background"};
+    private static final String[] userStyleClasses = {"user-dialog-background"};
+
+    private DialogBox(String text, Image img, String... styleClasses) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,6 +40,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.getStyleClass().addAll(styleClasses);
         displayPicture.setImage(img);
     }
 
@@ -50,11 +55,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, userStyleClasses);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, dukeStyleClasses);
         db.flip();
         return db;
     }
