@@ -20,14 +20,14 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    // Dynamic style classes
+    private static final String[] dukeStyleClasses = {"duke-dialog-background"};
+    private static final String[] userStyleClasses = {"user-dialog-background"};
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-    // Dynamic style classes
-    private static final String[] dukeStyleClasses = {"duke-dialog-background"};
-    private static final String[] userStyleClasses = {"user-dialog-background"};
 
     private DialogBox(String text, Image img, String... styleClasses) {
         try {
